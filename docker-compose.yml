@@ -1,0 +1,18 @@
+# PostgreSQL local para la fase 2 (conexión con Prisma).
+# Uso:  docker compose up -d
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: trazauni-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: trazauni
+      POSTGRES_PASSWORD: trazauni
+      POSTGRES_DB: trazauni
+    ports:
+      - "5432:5432"
+    volumes:
+      - trazauni-data:/var/lib/postgresql/data
+
+volumes:
+  trazauni-data:

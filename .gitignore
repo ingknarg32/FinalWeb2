@@ -1,0 +1,27 @@
+# Dependencias
+node_modules/
+
+# Builds
+.next/
+out/
+dist/
+
+# Variables de entorno (se versionan solo los .env.example)
+.env
+.env.local
+.env.*.local
+
+# Logs y sistema
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# Next.js
+next-env.d.ts
+*.tsbuildinfo
