@@ -1,0 +1,27 @@
+{
+  "name": "trazauni-backend",
+  "version": "0.1.0",
+  "description": "API REST + WebSockets de TrazaUni (prototipo con datos en memoria; esquema Prisma/PostgreSQL listo para la siguiente fase).",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch src/server.js",
+    "start": "node src/server.js",
+    "test": "node --test",
+    "db:validate": "prisma validate",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate dev"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.19.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "prisma": "^6.19.0"
+  }
+}
