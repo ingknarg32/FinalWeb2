@@ -25,3 +25,8 @@ Thumbs.db
 # Next.js
 next-env.d.ts
 *.tsbuildinfo
+
+# Archivos auxiliares generados por herramientas de desarrollo
+AGENTS.md
+CLAUDE.md
+.claude/
