@@ -1,0 +1,68 @@
+// Modelo relacional de TrazaUni (PostgreSQL + Prisma ORM).
+// Fase 1: el backend aún usa datos en memoria; este esquema deja listo el modelo
+// para conectarlo en la siguiente entrega (npm run db:migrate).
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  STUDENT
+  ADMIN
+}
+
+enum RequestStatus {
+  NUEVA
+  EN_PROCESO
+  RESUELTA
+}
+
+model User {
+  id           String         @id @default(cuid())
+  name         String
+  email        String         @unique
+  role         Role           @default(STUDENT)
+  createdAt    DateTime       @default(now())
+  requests     TraceRequest[] @relation("RequestOwner")
+  observations Observation[]
+
+  @@map("users")
+}
+
+model TraceRequest {
+  id           String        @id @default(cuid())
+  code         String        @unique // SOL-0001
+  title        String
+  description  String
+  category     String
+  status       RequestStatus @default(NUEVA)
+  studentId    String
+  student      User          @relation("RequestOwner", fields: [studentId], references: [id])
+  observations Observation[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  @@index([studentId])
+  @@index([status])
+  @@map("requests")
+}
+
+// Historial de trazabilidad: cada cambio de estado u observación de un responsable.
+model Observation {
+  id        String        @id @default(cuid())
+  requestId String
+  request   TraceRequest  @relation(fields: [requestId], references: [id], onDelete: Cascade)
+  authorId  String
+  author    User          @relation(fields: [authorId], references: [id])
+  status    RequestStatus // estado de la solicitud tras esta observación
+  message   String
+  createdAt DateTime      @default(now())
+
+  @@index([requestId, createdAt])
+  @@map("observations")
+}
