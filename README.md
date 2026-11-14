@@ -156,5 +156,6 @@ Otras capturas: [gestión de una solicitud](docs/evidencias/04-gestionar-solicit
 
 ## Integrantes
 
-- _Nombre completo del integrante 1_
-- _Nombre completo del integrante 2_
+- María del Carmen Peña Suarez
+- Cristhian Felipe Ortiz Montero
+- Juan David Gomez Rojas
